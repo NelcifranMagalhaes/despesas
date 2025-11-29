@@ -42,15 +42,12 @@ fun Route.moneyInRoutes(repository: MoneyInRepository = MoneyInRepository()) {
         }
 
         val request = call.receive<MoneyInUpdateRequest>()
-        repository.update(request.toMoneyIn().copy(id = uuid))?.let {
+        repository.update(request.toMoneyIn().copy(id = uuid)).let {
             call.respondText(
                 "Money has been updated to the database",
                 status = HttpStatusCode.Created
             )
-        } ?: call.respondText(
-            "Money not updated",
-            status = HttpStatusCode.BadRequest
-        )
+        }
     }
 }
 
