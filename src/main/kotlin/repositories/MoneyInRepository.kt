@@ -10,4 +10,6 @@ class MoneyInRepository(
     suspend fun moneyIns() = dao.findAll()
 
     suspend fun save(moneyIn: MoneyIn) = dao.save(moneyIn)
+
+    suspend fun update(moneyIn: MoneyIn) = dao.update(moneyIn)
 }

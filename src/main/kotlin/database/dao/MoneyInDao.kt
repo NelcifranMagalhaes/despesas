@@ -6,6 +6,7 @@ import nyo.com.br.models.MoneyIns
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.jetbrains.exposed.sql.update
 
 class MoneyInDao {
     suspend fun findAll(): List<MoneyIn> = dbQuery {
@@ -36,6 +37,15 @@ class MoneyInDao {
                 createdAt = it[MoneyIns.createdAt],
                 category = it[MoneyIns.category]
             )
+        }
+    }
+
+    suspend fun update(moneyIn: MoneyIn) = dbQuery {
+        MoneyIns.update({ MoneyIns.id eq moneyIn.id }) {
+            it[description] = moneyIn.description
+            it[moneyValue] = moneyIn.moneyValue
+            it[createdAt] = moneyIn.createdAt
+            it[category] = moneyIn.category
         }
     }
 }

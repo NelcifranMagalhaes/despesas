@@ -19,6 +19,6 @@ object MoneyOuts : Table() {
     val moneyValue = float("money_value")
     val createdAt = text("created_at")
     val category = text("category")
-    override val primaryKey = PrimaryKey(MoneyIns.id)
+    override val primaryKey = PrimaryKey(id)
 }
 
